@@ -1,0 +1,25 @@
+{
+  "name": "patterns-and-prikols",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc & node build/index.js",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimameh/patterns-and-prikols.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dimameh/patterns-and-prikols/issues"
+  },
+  "homepage": "https://github.com/dimameh/patterns-and-prikols#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "typescript": "^4.9.4"
+  }
+}
