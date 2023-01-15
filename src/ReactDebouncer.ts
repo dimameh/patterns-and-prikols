@@ -18,6 +18,9 @@ export default function useDebounce<T>(value: T, delay: number) {
   return debouncedValue;
 }
 
+
+// Example of usage
+
 function someReactFC() {
   const [searchText, setSearchText] = useState('');
   const debouncedSearchText = useDebounce(searchText, 600);
