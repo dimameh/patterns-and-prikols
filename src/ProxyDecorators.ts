@@ -19,14 +19,14 @@ class RunningFunctionsCounter {
     const handler = {
       get: function (obj: any, prop: any) {
 
-        if (typeof obj[prop] !== "function") {                  // if we getting non function property from this class, we just returning it 
+        if (typeof obj[prop] !== "function") {              // if we getting non function property from this class, we just returning it 
           return obj[prop];
 
-        } else {                                                // but when we getting function we need to apply some middleware 
+        } else {                                            // but when we getting function we need to apply some middleware 
           return async function (...args: any) {
-            obj.addRunningFunction(prop);                         // incrementing functions count before running function
-            const res = await obj[prop].apply(obj, args);     // running function
-            obj.removeRunningFunction(prop);                      // decremnenting functions count
+            obj.addRunningFunction(prop);                   // incrementing functions count before running function
+            const res = await obj[prop].apply(obj, args);   // running function
+            obj.removeRunningFunction(prop);                // decremnenting functions count
             return res;
           }
         }
