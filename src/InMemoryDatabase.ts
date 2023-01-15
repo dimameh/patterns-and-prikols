@@ -3,8 +3,8 @@ interface BaseRecord {
 }
 
 interface Database<T extends BaseRecord> {
-  add(newValue: T): void
-  get(id: string): T | null
+  add(newValue: T): void;
+  get(id: string): T | null;
 }
 
 export default class InMemoryDatabase<T extends BaseRecord> implements Database<T> {
@@ -22,14 +22,14 @@ export default class InMemoryDatabase<T extends BaseRecord> implements Database<
 // example of usage:
 
 interface SomeRecord extends BaseRecord {
-  someNumField: number
+  someNumField: number;
 }
 
-const someStuffDB = new InMemoryDatabase<SomeRecord>()
+const someStuffDB = new InMemoryDatabase<SomeRecord>();
 
 someStuffDB.add({
   id: 'cool id',
   someNumField: 123
-})
+});
 
-const data = someStuffDB.get('cool id')
+const data = someStuffDB.get('cool id');
