@@ -1,0 +1,18 @@
+// Creates a string that can be safely inserted into html
+function entityify(text) {
+       return text.replace(
+/&/g,
+           "&amp;"
+       ).replace(
+/</g,
+           "&lt;"
+       ).replace(
+/>/g,
+           "&gt;"
+       ).replace(
+           /\\/g,
+           "&bsol;"
+       ).replace(
+/"/g,
+"&quot;" );
+}
