@@ -1,0 +1,48 @@
+name: CI Extension
+
+on:
+  workflow_dispatch:
+  # push:
+    # Triggers workflow only if code is pushed to master branch
+    # branches: [ master ]
+    # paths:
+      # Triggers workflow only if manifest content is changed
+      # - './extension/src/manifest.ts'
+
+jobs:
+  Chrome:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
+    - uses: actions/setup-node@v2
+      with:
+        node-version: "16.15.0"
+    - uses: pnpm/action-setup@v2.2.2
+      with:
+        version: 7
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'pnpm'
+
+    - run: pnpm i
+    - run: pnpm run build --filter=extension
+
+    - name: Pack extension
+      uses: thedoctor0/zip-release@0.7.0
+      with:
+        type: 'zip'
+        directory: './extension/dist'
+        filename: ./Package.zip 
+
+    - uses: mnao305/chrome-extension-upload@v4.0.1
+      with:
+        extension-id: 'EXTENSION_ID' # extension id
+        file-path: ./extension/dist/Package.zip
+        client-id: ${{ secrets.CWS_CLIENT_ID }} # Chrome web store CLIENT ID
+        client-secret: ${{ secrets.CWS_CLIENT_SECRET }} # Chrome web store CLIENT secret
+        refresh-token: ${{ secrets.CWS_REFRESH_TOKEN }} # Chrome web store CLIENT token
+        publish: true
